@@ -9,8 +9,6 @@ var config = JSON.stringify({
     "grant_type": "client_credentials"
   });
 
-
-
 const getAccessToken = ( callback ) => {
     const req = {
         method: 'post',
