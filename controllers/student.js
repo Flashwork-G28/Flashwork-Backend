@@ -35,7 +35,6 @@ exports.regStudent =(req, res, next) => {
                 message: "Insert data"
         })
         
-    
     })
     
 };
