@@ -1,6 +1,6 @@
 let access_token = "Nothing";
 const conn = require("../services/db");
-const {INSERT_JOBPROVIDER} = require("../querys/user");
+const {INSERT_USER} = require("../querys/user");
 const axios = require('axios').default;
 
 var config = JSON.stringify({
@@ -30,6 +30,7 @@ const getAccessToken = ( callback ) => {
             console.log(error);
         });
 }
+
 exports.createAuthJobProvider = async (request, response ) => {
     console.log(request.body);
     getAccessToken(() => {
@@ -61,7 +62,8 @@ exports.createAuthJobProvider = async (request, response ) => {
             })
             .then(function (res) {
                 console.log(res.data);
-                conn.query(INSERT_JOBPROVIDER,[request.body.email,"Job Provider",request.body.firstName,request.body.lastName,request.body.mobile,request.body.street,request.body.city] ,(err, data, fields) => {
+                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
+                    console.log(err);
                 })
                 return response.status(res.status).json(res.data);
             })
@@ -105,7 +107,8 @@ exports.createAuthJobSeeker = async (request, response ) => {
             })
             .then(function (res) {
                 console.log(res.data);
-                conn.query(INSERT_JOBPROVIDER,[request.body.email,"Job Provider",request.body.firstName,request.body.lastName,request.body.mobile,request.body.street,request.body.city] ,(err, data, fields) => {
+                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Seeker",1] ,(err, data, fields) => {
+                    console.log(err);
                 })
                 return response.status(res.status).json(res.data);
             })
@@ -149,7 +152,8 @@ exports.createAuthManPower = async (request, response ) => {
             })
             .then(function (res) {
                 console.log(res.data);
-                conn.query(INSERT_JOBPROVIDER,[request.body.email,"Job Provider",request.body.firstName,request.body.lastName,request.body.mobile,request.body.street,request.body.city] ,(err, data, fields) => {
+                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Man Power",1] ,(err, data, fields) => {
+                    console.log(err);
                 })
                 return response.status(res.status).json(res.data);
             })
