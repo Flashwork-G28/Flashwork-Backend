@@ -1,6 +1,6 @@
 let access_token = "Nothing";
 const conn = require("../services/db");
-const {INSERT_USER} = require("../querys/user");
+const {INSERT_USER,INSERT_SEEKER,GET_USER_ID} = require("../querys/user");
 const axios = require('axios').default;
 
 var config = JSON.stringify({
@@ -30,6 +30,57 @@ const getAccessToken = ( callback ) => {
             console.log(error);
         });
 }
+
+exports.createAuthJobSeeker = async (request, response ) => {
+    console.log(request.body);
+    getAccessToken(() => {
+        // response.status(200).send(access_token)
+        axios(
+            {
+                method: 'post',
+                url: 'https://flashwork.us.auth0.com/api/v2/users',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    'Content-Type': 'application/json',
+                },
+                data: JSON.stringify(
+                    {
+                        "email": request.body.email,
+                        "blocked": false,
+                        "email_verified": false,
+                        "given_name": request.body.firstName,
+                        "name": request.body.firstName + " " + request.body.lastName,
+                        "nickname": request.body.firstName + " " + request.body.lastName,
+                        "password": request.body.password,
+                        "user_metadata": {
+                            "type": "Job Seeker"
+                        },
+                        "family_name": "JobSeeker",
+                        "connection": "Username-Password-Authentication",
+                        "verify_email": true
+                    })
+            })
+            .then(function (res) {
+                console.log(res.data);
+                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
+                    console.log(err);
+                })
+                // conn.query(INSERT_USER,[request.body.nid] ,(err, data, fields) => {
+                //     console.log(data);
+                // })
+
+
+                return response.status(res.status).json(res.data);
+            })
+            .catch(function (error) {
+                console.log(error.message);
+                // logging.error(NAMESPACE, 'Not Done', error.message);
+                return response.status(error.code).json(error.message);
+            })
+        // response.send(access_token)
+    })
+}
+
 
 exports.createAuthJobProvider = async (request, response ) => {
     console.log(request.body);
@@ -76,50 +127,6 @@ exports.createAuthJobProvider = async (request, response ) => {
     })
 }
 
-exports.createAuthJobSeeker = async (request, response ) => {
-    console.log(request.body);
-    getAccessToken(() => {
-        // response.status(200).send(access_token)
-        axios(
-            {
-                method: 'post',
-                url: 'https://flashwork.us.auth0.com/api/v2/users',
-                headers: {
-                    'Authorization': `Bearer ${access_token}`,
-                    'Content-Type': 'application/json',
-                },
-                data: JSON.stringify(
-                    {
-                        "email": request.body.email,
-                        "blocked": false,
-                        "email_verified": false,
-                        "given_name": request.body.firstName,
-                        "name": request.body.firstName + " " + request.body.lastName,
-                        "nickname": request.body.firstName + " " + request.body.lastName,
-                        "password": request.body.password,
-                        "user_metadata": {
-                            "type": "Job Seeker"
-                        },
-                        "family_name": "JobSeeker",
-                        "connection": "Username-Password-Authentication",
-                        "verify_email": true
-                    })
-            })
-            .then(function (res) {
-                console.log(res.data);
-                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Seeker",1] ,(err, data, fields) => {
-                    console.log(err);
-                })
-                return response.status(res.status).json(res.data);
-            })
-            .catch(function (error) {
-                console.log(error.message);
-                // logging.error(NAMESPACE, 'Not Done', error.message);
-                return response.status(error.code).json(error.message);
-            })
-        // response.send(access_token)
-    })
-}
 
 exports.createAuthManPower = async (request, response ) => {
     console.log(request.body);
