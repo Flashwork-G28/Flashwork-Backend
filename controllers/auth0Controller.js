@@ -65,6 +65,7 @@ exports.createAuthJobSeeker = async (request, response ) => {
                 conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
                     console.log(err);
                 })
+
                 // conn.query(INSERT_USER,[request.body.nid] ,(err, data, fields) => {
                 //     console.log(data);
                 // })
