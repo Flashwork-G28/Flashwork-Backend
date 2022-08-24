@@ -1,4 +1,5 @@
 const conn = require("../services/db");
+
 exports.INSERT_USER = 'INSERT INTO user (user_id, first_name, last_name, nid, street, city, mobile, email, type, status) VALUES (NULL, ?, ?, ?, ?, ?,?, ?,? , ?);'
 
 exports.GET_USER_ID = 'SELECT user_id FROM `user` WHERE nid = '
