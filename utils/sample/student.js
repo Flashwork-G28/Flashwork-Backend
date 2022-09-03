@@ -1,6 +1,6 @@
-const { INSERT_STUDENT } = require("../querys/student");
-const conn = require("../services/db");
-const AppError = require("../utils/appError");
+const { INSERT_STUDENT } = require("../../querys/student");
+const conn = require("../../services/db");
+const AppError = require("../appError");
 
 exports.getAllStudent =(req, res, next) => {
     console.log('getAllStudent');

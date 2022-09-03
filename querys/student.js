@@ -1,1 +1,0 @@
-exports.INSERT_STUDENT = "SELECT * FROM students WHERE email = ?"; 

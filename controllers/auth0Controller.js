@@ -1,6 +1,6 @@
 let access_token = "Nothing";
 const conn = require("../services/db");
-const {INSERT_USER,INSERT_SEEKER,GET_USER_ID} = require("../querys/user");
+const {INSERT_USER,INSET_JOPPROVIDER,INSERT_JOBSEEKER} = require("../querys/user");
 const axios = require('axios').default;
 
 var config = JSON.stringify({
@@ -47,7 +47,7 @@ exports.createAuthJobSeeker = async (request, response ) => {
                     {
                         "email": request.body.email,
                         "blocked": false,
-                        "email_verified": false,
+                        "email_verified": true,
                         "given_name": request.body.firstName,
                         "name": request.body.firstName + " " + request.body.lastName,
                         "nickname": request.body.firstName + " " + request.body.lastName,
@@ -62,14 +62,12 @@ exports.createAuthJobSeeker = async (request, response ) => {
             })
             .then(function (res) {
                 console.log(res.data);
-                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
+                conn.query(INSERT_USER,[ res.data.identities[0].user_id,request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Seeker",1] ,(err, data, fields) => {
                     console.log(err);
                 })
-
-                // conn.query(INSERT_USER,[request.body.nid] ,(err, data, fields) => {
-                //     console.log(data);
-                // })
-
+                conn.query(INSERT_JOBSEEKER,["male",request.body.description,"Restaurant & food services", res.data.identities[0].user_id] ,(err, data, fields) => {
+                    console.log(err);
+                })
 
                 return response.status(res.status).json(res.data);
             })
@@ -81,7 +79,6 @@ exports.createAuthJobSeeker = async (request, response ) => {
         // response.send(access_token)
     })
 }
-
 
 exports.createAuthJobProvider = async (request, response ) => {
     console.log(request.body);
@@ -99,7 +96,7 @@ exports.createAuthJobProvider = async (request, response ) => {
                     {
                         "email": request.body.email,
                         "blocked": false,
-                        "email_verified": false,
+                        "email_verified": true,
                         "given_name": request.body.firstName,
                         "name": request.body.firstName + " " + request.body.lastName,
                         "nickname": request.body.firstName + " " + request.body.lastName,
@@ -113,8 +110,11 @@ exports.createAuthJobProvider = async (request, response ) => {
                     })
             })
             .then(function (res) {
-                console.log(res.data);
-                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
+                //console.log(res.data.identities[0].user_id);
+                conn.query(INSERT_USER,[ res.data.identities[0].user_id,request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
+                    console.log(err);
+                })
+                conn.query(INSET_JOPPROVIDER,["male", res.data.identities[0].user_id] ,(err, data, fields) => {
                     console.log(err);
                 })
                 return response.status(res.status).json(res.data);
@@ -127,7 +127,6 @@ exports.createAuthJobProvider = async (request, response ) => {
     // response.send(access_token)
     })
 }
-
 
 exports.createAuthManPower = async (request, response ) => {
     console.log(request.body);
@@ -145,7 +144,7 @@ exports.createAuthManPower = async (request, response ) => {
                     {
                         "email": request.body.email,
                         "blocked": false,
-                        "email_verified": false,
+                        "email_verified": true,
                         "given_name": request.body.firstName,
                         "name": request.body.firstName + " " + request.body.lastName,
                         "nickname": request.body.firstName + " " + request.body.lastName,

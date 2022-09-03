@@ -1,5 +1,4 @@
 const express = require('express');
-// const { getAllStudent,regStudent } = require('../controllers/student');
 const { createAuthJobProvider, createAuthJobSeeker, createAuthManPower} = require('../controllers/auth0Controller')
 
 const router = express.Router();

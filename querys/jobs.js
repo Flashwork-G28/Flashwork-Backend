@@ -1,0 +1,1 @@
+exports.GET_JOBS = 'SELECT * FROM jobs,user WHERE jobs.user_id=user.user_id;'
