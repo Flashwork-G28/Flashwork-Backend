@@ -4,7 +4,7 @@ const conn = mysql.createPool({
     user: 'root',
     password: '',
     database: 'flashwork',
-    port: "3308",
+    port: "3306",
 });
 
 // conn.connect(); //just for  create Connected
@@ -15,3 +15,4 @@ conn.getConnection(function(err) {
   });
 
 module.exports = conn;
+// Set-ExecutionPolicy Unrestricted
