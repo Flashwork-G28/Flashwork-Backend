@@ -158,14 +158,14 @@ exports.createAuthManPower = async (request, response ) => {
                     })
             })
             .then(function (res) {
-                console.log(res.data);
+                // console.log(res.data);
                 conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Man Power",1] ,(err, data, fields) => {
                     console.log(err);
                 })
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                console.log(error.message);
+                // console.log(error.message);
                 // logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
