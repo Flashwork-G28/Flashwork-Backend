@@ -34,7 +34,6 @@ exports.getLatestJobs = async (request, response ) => {
         }
     })
 }
-
 exports.applyForJob = async (request, response ) => {
     // console.log(request.body);
     conn.query(APPLY_FOR_JOB,[request.body.job_id,request.body.seeker_id], (err, data, fields) => {
