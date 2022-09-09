@@ -3,6 +3,7 @@ const {GET_WORKERS} = require("../querys/workers");
 
 exports.getWorkers = async (request, response ) => {
     // console.log("data");
+
     conn.query(GET_WORKERS, (err, data, fields) => {
         if(err) {
             // console.log(err);
