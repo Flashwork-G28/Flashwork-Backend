@@ -6,7 +6,6 @@ const conn = mysql.createPool({
     database: 'flashwork',
     port: "3306",
 });
-
 // conn.connect(); //just for  create Connected
 
 conn.getConnection(function(err) {
