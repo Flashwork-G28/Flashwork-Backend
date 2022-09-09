@@ -1,6 +1,7 @@
 const express = require('express');
 const router_auth0 = require('./routes/auth0');
 const router_jobs = require('./routes/jobs');
+const router_workers = require('./routes/workers');
 // const errorHandler = require('./utils/errorHandler');
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors())
 
 app.use("/register",router_auth0);
 app.use("/jobs",router_jobs);
+app.use("/workers",router_workers);
 
 
 
