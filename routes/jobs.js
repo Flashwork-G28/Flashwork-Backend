@@ -1,5 +1,5 @@
 const express = require('express');
-const {getJobs, getLatestJobs, applyForJob} = require('../controllers/jobs')
+const {getJobs, getLatestJobs, applyForJob, JobAdPost} = require('../controllers/jobs')
 
 const router = express.Router();
 
@@ -11,5 +11,8 @@ router.route("/last")
 
 router.route("/apply")
     .post(applyForJob)
+
+router.route("/JobAdPost")
+    .post(JobAdPost) 
 
 module.exports = router;
