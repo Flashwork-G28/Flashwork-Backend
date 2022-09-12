@@ -1,3 +1,17 @@
-exports.GET_WORKERS = 'SELECT user.user_id, user.first_name , user.last_name , job_seeker.description , job_seeker.category FROM user INNER JOIN job_seeker ON user.user_id = job_seeker.user_id;'
 
-exports.GET_WORKERS_RATE = 'SELECT AVG(rate) AS rating , COUNT(rate_receiver_id= ?) AS rating_count ,(SELECT COUNT(status) FROM complet_job WHERE status=?  AND job_seeker_id= ?) AS complet_count FROM rate WHERE rate_receiver_id= ?;'
+
+exports.GET_WORKERS = "SELECT user.user_id,user.first_name,user.last_name,user.img,job_seeker.description,job_seeker.category,COUNT(complet_job.id) AS complet_count ,AVG(rate.rate) AS rate FROM user,rate,job_seeker,complet_job WHERE user.user_id=job_seeker.user_id AND user.user_id=complet_job.job_seeker_id AND complet_job.id=rate.complet_job_id AND complet_job.status='1' GROUP BY user.user_id;"
+
+exports.POST_WORKERS_BOOK = 'INSERT INTO worker_booking (job_seeker_id, job_provider_id,req_date,required_date,location,payment_type,pay,worker_count,description,category,status) VALUES (?,? ,CURRENT_TIMESTAMP,?,?,?,?,1,?,(SELECT category FROM job_seeker WHERE job_seeker.user_id=?),0);'
+
+
+
+
+
+
+
+
+
+
+
+
