@@ -1,10 +1,9 @@
 const express = require('express');
-// const {getWorkers , postWorkersBook} = require('../controllers/workers')
+const {getBookingWorkers} = require('../controllers/jobProvider')
 
 const router = express.Router();
 
 router.route("/")
-    // .get(getWorkers)
-
+    .get(getBookingWorkers)
 
 module.exports = router;

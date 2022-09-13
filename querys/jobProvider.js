@@ -1,0 +1,2 @@
+
+exports.GET_BOOKING_WORKERS = "SELECT user.user_id,user.first_name,user.last_name,user.img,job_seeker.description,job_seeker.category,COUNT(complet_job.id) AS complet_count ,AVG(rate.rate) AS rate FROM user,rate,job_seeker,complet_job WHERE user.user_id=job_seeker.user_id AND user.user_id=complet_job.job_seeker_id AND complet_job.id=rate.complet_job_id AND complet_job.status='1' GROUP BY user.user_id;"
