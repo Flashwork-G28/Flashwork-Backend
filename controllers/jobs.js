@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {GET_JOBS,GET_LATESTJOBS, APPLY_FOR_JOB, JOB_AD_POST} = require("../querys/jobs");
+const {GET_JOBS,GET_LATESTJOBS, APPLY_FOR_JOB, JOB_AD_POST, JOB_AD_VIEW, JOB_DELETE} = require("../querys/jobs");
 
 exports.getJobs = async (request, response ) => {
     // console.log(request.body);
@@ -62,6 +62,40 @@ exports.JobAdPost = async (request, response ) => {
         } else {
             console.log(data);
             response.status(201).json('Added successfully')
+        }
+    })
+}
+exports.JobAdView = async (request, response ) => {
+    // console.log(request.body);
+
+    // console.log(request.query.user_id);
+
+    conn.query(JOB_AD_VIEW, [request.query.user_id], (err, data, fields) => {
+        if(err) {
+            // console.log(err);
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            // console.log(data);
+            response.status(200).send(
+                data
+            )
+        }
+    })
+}
+exports.DeleteJobs = async (request, response ) => {
+
+    // console.log(request.query.user_id);
+    // console.log(request.query.id);
+
+    conn.query(JOB_DELETE, [request.query.user_id, request.query.id], function(err, data, fields) {
+        if(err) {
+            console.log(err);
+            response.status(401).json('Sorry!! Unable to delete')
+        } else {
+            console.log(data);
+            response.status(201).json('Deleted successfully')
         }
     })
 }

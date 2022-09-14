@@ -7,3 +7,7 @@ exports.APPLY_FOR_JOB = 'INSERT INTO job_apply ( id, job_id, seeker_id, date) VA
 exports.UPDATE_AMC = 'UPDATE jobs SET amc = amc - 1 WHERE id = ?'
 
 exports.JOB_AD_POST = 'INSERT INTO jobs (title, category, apply_type, city, rmc, amc, pay, pub_date, job_date, description, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?);'
+
+exports.JOB_AD_VIEW = 'SELECT * FROM jobs WHERE jobs.user_id = ?;'
+
+exports.JOB_DELETE = 'DELETE FROM jobs WHERE (jobs.user_id = ?) && (jobs.id = ?);'
