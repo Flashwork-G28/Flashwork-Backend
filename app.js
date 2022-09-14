@@ -11,13 +11,9 @@ let cors = require('cors');
 app.use(cors())
 // app.use(errorHandler);
 
-
-
 app.use("/register",router_auth0);
 app.use("/jobs",router_jobs);
-app.use("/jobseeker",router_JobSeeker)
-
-
+app.use("/JobSeeker",router_JobSeeker)
 
 
 // app.all("*", (req, res, next) => {
