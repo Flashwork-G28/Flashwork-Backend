@@ -4,7 +4,7 @@ const {getJobs, getLatestJobs, applyForJob} = require('../controllers/jobs')
 const router = express.Router();
 
 router.route("/")
-    .get(getJobs)
+    .post(getJobs)
 
 router.route("/last")
     .get(getLatestJobs)
