@@ -4,6 +4,6 @@ const {getBookingWorkers} = require('../controllers/jobProvider')
 const router = express.Router();
 
 router.route("/")
-    .get(getBookingWorkers)
+    .post(getBookingWorkers)
 
 module.exports = router;

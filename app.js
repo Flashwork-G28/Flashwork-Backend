@@ -22,11 +22,10 @@ app.use("/jobProvider",router_provider);
 
 
 
-
-
 // app.all("*", (req, res, next) => {
 //     next(new AppError(`url ${req.originalUrl} not found`, 404));
 // })
+
 
 app.listen (PORT,() => {
     console.log('server running on port ' + PORT);
