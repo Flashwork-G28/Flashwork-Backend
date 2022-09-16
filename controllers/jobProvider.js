@@ -11,6 +11,7 @@ exports.getBookingWorkers = async (request, response ) => {
                 data: err
             })
         } else {
+            console.log(data);
             response.status(200).send(
                 data
             );
