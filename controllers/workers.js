@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {GET_WORKERS,POST_WORKERS_BOOK} = require("../querys/workers");
+const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS} = require("../querys/workers");
 
 
 exports.getWorkers = async (request, response ) => {
@@ -45,21 +45,20 @@ exports.postWorkersBook = async (request, response ) => {
     })
 
 }
-//
-// exports.getMAWorkers = async (request, response ) => {
-//
-//     conn.query(GET_MAWORKERS, (err, data, fields) => {
-//
-//         if(err) {
-//             response.status(401).json({
-//                 data: err
-//             })
-//         } else {
-//
-//             response.status(200).send(
-//                 data
-//             );
-//         }
-//
-//     })
-// }
+
+exports.getMAWorkers = async (request, response ) => {
+
+    conn.query(GET_MAWORKERS, (err, data, fields) => {
+
+        if(err) {
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            response.status(200).send(
+                data
+            );
+        }
+
+    })
+}
