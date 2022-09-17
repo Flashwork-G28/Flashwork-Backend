@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS} = require("../querys/workers");
+const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS, POST_MANPOWER_BOOK} = require("../querys/workers");
 
 
 exports.getWorkers = async (request, response ) => {
@@ -62,3 +62,41 @@ exports.getMAWorkers = async (request, response ) => {
 
     })
 }
+
+exports.postManPowerBook = async (request, response ) => {
+    console.log("request--------");
+    console.log(request);
+
+
+    conn.query(POST_MANPOWER_BOOK,[request.body.ma_id,
+        request.body.job_provider_id,
+        request.body.req_date,
+        request.body.city,
+        request.body.payment_type,
+        request.body.pay,
+        request.body.worker_count,
+        request.body.description,
+        request.body.category], (err, data, fields) => {
+
+        if(err) {
+            console.log(err);
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            console.log(data);
+            response.status("201").json({
+                data: "success",
+                message: "Insert data"
+            })
+        }
+
+    })
+
+}
+
+
+
+
+
+

@@ -6,6 +6,11 @@ exports.POST_WORKERS_BOOK = 'INSERT INTO worker_booking (job_seeker_id, job_prov
 
 exports.GET_MAWORKERS='SELECT * FROM (SELECT user.user_id AS u_id ,user.img,manpower.description, manpower.company_name, COUNT(complet_job.id) AS complet_count ,AVG(rate.rate) AS rate FROM user,rate,manpower,complet_job WHERE user.user_id=manpower.user_id AND user.user_id=complet_job.job_seeker_id AND complet_job.id=rate.complet_job_id AND complet_job.status=\'1\' GROUP BY user.user_id) AS MA LEFT JOIN manpower_category_list ON manpower_category_list.user_id=MA.u_id ORDER BY manpower_category_list.id;'
 
+exports.POST_MANPOWER_BOOK = 'INSERT INTO worker_booking (job_seeker_id, job_provider_id,req_date,required_date,location,payment_type,pay,worker_count,description,category,status) VALUES (?,? ,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,0);'
+
+
+
+
 
 
 
