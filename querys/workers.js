@@ -8,6 +8,9 @@ exports.GET_MAWORKERS='SELECT * FROM (SELECT user.user_id AS u_id ,user.img,manp
 
 exports.POST_MANPOWER_BOOK = 'INSERT INTO worker_booking (job_seeker_id, job_provider_id,req_date,required_date,location,payment_type,pay,worker_count,description,category,status) VALUES (?,? ,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,0);'
 
+exports.POST_FAVOURITE = 'INSERT INTO favourite (seeker_manpower, job_provider_id) VALUES (?,?);'
+
+
 
 
 

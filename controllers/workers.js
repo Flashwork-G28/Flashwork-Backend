@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS, POST_MANPOWER_BOOK} = require("../querys/workers");
+const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS, POST_MANPOWER_BOOK,POST_FAVOURITE} = require("../querys/workers");
 
 
 exports.getWorkers = async (request, response ) => {
@@ -77,6 +77,30 @@ exports.postManPowerBook = async (request, response ) => {
         request.body.worker_count,
         request.body.description,
         request.body.category], (err, data, fields) => {
+
+        if(err) {
+            console.log(err);
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            console.log(data);
+            response.status("201").json({
+                data: "success",
+                message: "Insert data"
+            })
+        }
+
+    })
+
+}
+
+exports.postFavourite = async (request, response ) => {
+    console.log("favourite.......................");
+    console.log(request);
+
+    conn.query(POST_FAVOURITE,[request.body.job_seeker_id,
+        request.body.job_provider_id ], (err, data, fields) => {
 
         if(err) {
             console.log(err);

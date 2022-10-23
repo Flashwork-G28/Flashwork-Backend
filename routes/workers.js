@@ -1,5 +1,5 @@
 const express = require('express');
-const {getWorkers , postWorkersBook ,getMAWorkers ,postManPowerBook} = require('../controllers/workers')
+const {getWorkers , postWorkersBook ,getMAWorkers ,postManPowerBook, postFavourite} = require('../controllers/workers')
 
 const router = express.Router();
 
@@ -14,6 +14,9 @@ router.route("/ManPower")
 
 router.route("/bookingMA")
     .post(postManPowerBook)
+
+router.route("/favourite")
+    .post(postFavourite)
 
 
 module.exports = router;
