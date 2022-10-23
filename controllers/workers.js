@@ -111,7 +111,7 @@ exports.postFavourite = async (request, response ) => {
             console.log(data);
             response.status("201").json({
                 data: "success",
-                message: "Insert data"
+                message: "1"
             })
         }
 
