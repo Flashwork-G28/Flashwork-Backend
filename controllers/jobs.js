@@ -18,8 +18,7 @@ exports.getJobs = async (request, response ) => {
             return data;
         }
     }
-
-
+    
     conn.query(GET_JOBS, (err, data, fields) => {
         if(err) {
             // console.log(err);
