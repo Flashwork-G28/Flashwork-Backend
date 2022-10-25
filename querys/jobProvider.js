@@ -5,5 +5,5 @@ exports.GET_SAVED_WORKERS ="SELECT user.user_id,user.first_name,user.last_name,u
 
 exports.GET_NOTIFICATION ="SELECT * FROM job_provider_notification WHERE user_id= ? ;"
 
-exports.GET_NOTIFICATION_COUNT ="SELECT COUNT(user_id) FROM job_provider_notification WHERE user_id= ? ;"
+exports.GET_NOTIFICATION_COUNT ="SELECT COUNT(user_id) AS count FROM job_provider_notification WHERE user_id= ? ;"
 
