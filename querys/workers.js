@@ -11,9 +11,13 @@ exports.POST_MANPOWER_BOOK = 'INSERT INTO worker_booking (job_seeker_id, job_pro
 exports.POST_FAVOURITE = 'INSERT INTO favourite (seeker_manpower, job_provider_id) VALUES (?,?);'
 
 
+exports.UPDATE_NOTIFICATION_BOOKING = 'INSERT INTO favourite (seeker_manpower, job_provider_id) VALUES (?,?);'
 
 
 
+// UPDATE Customers
+// SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+// WHERE CustomerID = 1;
 
 
 
