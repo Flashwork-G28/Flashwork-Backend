@@ -1,4 +1,4 @@
-const {createJobSeeker,ProviderProfile} = require("../controllers/JobSeekerController");
+const {createJobSeeker,ProviderProfile,updateSeeker} = require("../controllers/JobSeekerController");
 const express = require('express');
 
 
@@ -7,6 +7,7 @@ router.route("/profile")
     .get(createJobSeeker);
 router.route("/jobProviderProfile")
     .get(ProviderProfile);
+router.route("/updateProfile").post(updateSeeker)
 console.log("check here")
 
 module.exports = router;

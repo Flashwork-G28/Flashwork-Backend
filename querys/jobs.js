@@ -8,4 +8,4 @@ exports.UPDATE_AMC = 'UPDATE jobs SET amc = amc - 1 WHERE id = ?'
 
 exports.APPLIED_JOBS = 'SELECT user.first_name, user.last_name, jobs.category, jobs.status, user.city FROM user INNER JOIN jobs ON user.user_id=jobs.user_id'
 
-exports.REQUEST_JOBS = 'SELECT user.first_name, user.last_name, jobs.category, jobs.status, user.city FROM user INNER JOIN jobs ON user.user_id=jobs.user_id'
+exports.REQUEST_JOBS = 'SELECT user.first_name,user.city,jobs.category FROM user INNER JOIN jobs ON user.user_id=jobs.user_id'
