@@ -4,7 +4,7 @@ const {getJobs, getLatestJobs, applyForJob, JobAdPost, JobAdView, DeleteJobs} = 
 const router = express.Router();
 
 router.route("/")
-    .get(getJobs)
+    .post(getJobs)
 
 router.route("/last")
     .get(getLatestJobs)
