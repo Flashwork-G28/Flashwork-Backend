@@ -5,6 +5,7 @@ const router_workers = require('./routes/workers');
 const router_complaints = require('./routes/complaints');
 const router_users = require('./routes/users');
 const router_chat = require('./routes/chat');
+const router_payments = require('./routes/payments');
 // const errorHandler = require('./utils/errorHandler');
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/workers",router_workers);
 app.use("/complaints",router_complaints)
 app.use("/users",router_users)
 app.use("/chat",router_chat)
+app.use("/payments",router_payments)
 
 
 

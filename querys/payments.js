@@ -1,0 +1,1 @@
+exports.VIEW_PAY = 'SELECT * FROM payment;'
