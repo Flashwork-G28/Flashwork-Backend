@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS, POST_MANPOWER_BOOK,POST_FAVOURITE} = require("../querys/workers");
+const {GET_WORKERS,POST_WORKERS_BOOK ,GET_MAWORKERS, POST_MANPOWER_BOOK,POST_FAVOURITE,UPDATE_NOTIFICATION_BOOKING} = require("../querys/workers");
 
 
 exports.getWorkers = async (request, response ) => {
@@ -21,7 +21,8 @@ exports.getWorkers = async (request, response ) => {
 }
 
 exports.postWorkersBook = async (request, response ) => {
-    conn.query(POST_WORKERS_BOOK,[request.body.job_seeker_id,
+
+    conn.query(UPDATE_NOTIFICATION_BOOKING,[request.body.job_seeker_id,
         request.body.job_provider_id,
         request.body.req_date,
         request.body.city,
@@ -36,13 +37,34 @@ exports.postWorkersBook = async (request, response ) => {
                 data: err
             })
         } else {
-            response.status("201").json({
-                data: "success",
-                message: "Insert data"
+            conn.query(POST_WORKERS_BOOK,[request.body.job_seeker_id,
+                request.body.job_provider_id,
+                request.body.req_date,
+                request.body.city,
+                request.body.payment_type,
+                request.body.pay,
+                request.body.description,
+                request.body.job_seeker_id], (err, data, fields) => {
+
+                if(err) {
+                    console.log(err);
+                    response.status(401).json({
+                        data: err
+                    })
+                } else {
+                    response.status("201").json({
+                        data: "success",
+                        message: "Insert data"
+                    })
+                }
+
             })
+
         }
 
     })
+
+
 
 }
 
