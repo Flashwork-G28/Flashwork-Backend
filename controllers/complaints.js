@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {JOB_SEEKER_COMPL, VIEW_COMPL} = require("../querys/complaints");
+const {JOB_SEEKER_COMPL, VIEW_COMPL, DELETE_COMPL} = require("../querys/complaints");
 
 exports.JobSeekerCompl = async (request, response) => {
     console.log(request.body);
@@ -30,3 +30,22 @@ exports.ViewCompl = async (request, response) => {
         }
     })
 }
+
+exports.DeleteCompl = async (request, response) => {
+    console.log(request.query);
+    console.log(request.params);
+    conn.query(DELETE_COMPL, [request.params.id], function(err, data, fields) {
+        if(err) {
+            console.log(err);
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            console.log(data);
+            response.status(200).send(
+                data
+            )
+        }
+    })
+}
+
