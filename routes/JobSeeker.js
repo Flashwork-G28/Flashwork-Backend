@@ -1,4 +1,4 @@
-const {createJobSeeker,ProviderProfile} = require("../controllers/JobSeeker");
+const {createJobSeeker,ProviderProfile} = require("../controllers/JobSeekerController");
 const express = require('express');
 
 

@@ -4,6 +4,7 @@ const {GET_Profile_Edit,GET_jobProviderProfile} = require("../querys/JobSeeker")
 
 exports.createJobSeeker = async (request, response ) => {
 
+    console.log("Hello");
 
     conn.query(GET_Profile_Edit, (err, data, fields) => {
         if(err) {
