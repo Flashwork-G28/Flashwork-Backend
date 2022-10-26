@@ -4,6 +4,8 @@ const router_jobs = require('./routes/jobs');
 const router_workers = require('./routes/workers');
 const router_paymnet = require('./routes/payment');
 const router_complaints = require('./routes/complaints');
+const router_users = require('./routes/users');
+const router_chat = require('./routes/chat');
 
 const router_provider = require('./routes/jobProvider');
 
@@ -26,7 +28,8 @@ app.use("/jobs",router_jobs);
 app.use("/workers",router_workers);
 app.use("/jobProvider",router_provider);
 app.use("/complaints",router_complaints)
-
+app.use("/users",router_users)
+app.use("/chat",router_chat)
 
 
 
