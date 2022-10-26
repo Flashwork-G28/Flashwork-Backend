@@ -1,5 +1,6 @@
-const {createJobSeeker,ProviderProfile} = require("../controllers/JobSeekerController");
+const {createJobSeeker,ProviderProfile} = require("../controllers/JobSeeker");
 const express = require('express');
+
 
 const router = express.Router();
 router.route("/profile")

@@ -13,7 +13,6 @@ exports.createJobSeeker = async (request, response ) => {
             })
         }
         else {
-
             response.status(200).send(
                 data
             )
