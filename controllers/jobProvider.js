@@ -55,6 +55,7 @@ exports.getNotificationCount = async (request, response ) => {
 
     conn.query(GET_NOTIFICATION_COUNT,[request.body.job_provider_id], (err, data, fields) => {
 
+
         if(err) {
             response.status(401).json({
                 data: err
