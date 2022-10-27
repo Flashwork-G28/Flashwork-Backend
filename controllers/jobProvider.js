@@ -1,5 +1,5 @@
 const conn = require("../services/db");
-const {GET_BOOKING_WORKERS,GET_SAVED_WORKERS,GET_NOTIFICATION,GET_NOTIFICATION_COUNT} = require("../querys/jobProvider");
+const {GET_BOOKING_WORKERS,GET_SAVED_WORKERS,GET_NOTIFICATION,GET_NOTIFICATION_COUNT,GET_JOB_ONGOIN} = require("../querys/jobProvider");
 
 exports.getBookingWorkers = async (request, response ) => {
     // console.log(request.body);
@@ -68,6 +68,25 @@ exports.getNotificationCount = async (request, response ) => {
     })
 
 }
+
+exports.getOngoinAdvertiesment = async (request, response ) => {
+
+    conn.query(GET_JOB_ONGOIN,[request.body.job_provider_id], (err, data, fields) => {
+
+
+        if(err) {
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            response.status(200).send(
+                data
+            );
+        }
+    })
+
+}
+
 
 
 
