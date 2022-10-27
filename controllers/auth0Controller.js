@@ -1,6 +1,6 @@
 let access_token = "Nothing";
 const conn = require("../services/db");
-const {INSERT_USER,INSET_JOPPROVIDER,INSERT_JOBSEEKER} = require("../querys/user");
+const {INSERT_USER,INSET_JOPPROVIDER,INSERT_JOBSEEKER, INSERT_MANPOWER} = require("../querys/user");
 const axios = require('axios').default;
 
 
@@ -35,7 +35,8 @@ const getAccessToken = ( callback ) => {
 }
 
 exports.createAuthJobSeeker = async (request, response ) => {
-    console.log(request.body);
+    // console.log(request.body);
+
     getAccessToken(() => {
         // response.status(200).send(access_token)
         axios(
@@ -50,7 +51,7 @@ exports.createAuthJobSeeker = async (request, response ) => {
                     {
                         "email": request.body.email,
                         "blocked": false,
-                        "email_verified": true,
+                        "email_verified": false,
                         "given_name": request.body.firstName,
                         "name": request.body.firstName + " " + request.body.lastName,
                         "nickname": request.body.firstName + " " + request.body.lastName,
@@ -64,14 +65,14 @@ exports.createAuthJobSeeker = async (request, response ) => {
                     })
             })
             .then(function (res) {
-                console.log(res.data);
-                conn.query(INSERT_USER,[ res.data.identities[0].user_id,request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Seeker",1] ,(err, data, fields) => {
+                // console.log(res.data);
+                conn.query(INSERT_USER,[ res.data.identities[0].user_id,res.data.picture,request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Seeker",1] ,(err, data, fields) => {
                     console.log(err);
                 })
-                conn.query(INSERT_JOBSEEKER,["male",request.body.description,"Restaurant & food services", res.data.identities[0].user_id] ,(err, data, fields) => {
+                console.log("2nd")
+                conn.query(INSERT_JOBSEEKER,[request.body.gender,request.body.description,request.body.categories, res.data.identities[0].user_id] ,(err, data, fields) => {
                     console.log(err);
                 })
-
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
@@ -79,12 +80,12 @@ exports.createAuthJobSeeker = async (request, response ) => {
                 // logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
-        // response.send(access_token)
     })
 }
 
 exports.createAuthJobProvider = async (request, response ) => {
-    console.log(request.body);
+    // console.log(request.body);
+
     getAccessToken(() => {
         // response.status(200).send(access_token)
         axios(
@@ -99,7 +100,7 @@ exports.createAuthJobProvider = async (request, response ) => {
                     {
                         "email": request.body.email,
                         "blocked": false,
-                        "email_verified": true,
+                        "email_verified": false,
                         "given_name": request.body.firstName,
                         "name": request.body.firstName + " " + request.body.lastName,
                         "nickname": request.body.firstName + " " + request.body.lastName,
@@ -113,11 +114,11 @@ exports.createAuthJobProvider = async (request, response ) => {
                     })
             })
             .then(function (res) {
-                //console.log(res.data.identities[0].user_id);
-                conn.query(INSERT_USER,[ res.data.identities[0].user_id,request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
+                // console.log(res.data);
+                conn.query(INSERT_USER,[ res.data.identities[0].user_id,res.data.picture,request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Job Provider",1] ,(err, data, fields) => {
                     console.log(err);
                 })
-                conn.query(INSET_JOPPROVIDER,["male", res.data.identities[0].user_id] ,(err, data, fields) => {
+                conn.query(INSET_JOPPROVIDER,[request.body.gender, res.data.identities[0].user_id] ,(err, data, fields) => {
                     console.log(err);
                 })
                 return response.status(res.status).json(res.data);
@@ -127,12 +128,14 @@ exports.createAuthJobProvider = async (request, response ) => {
                 // logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
+
     // response.send(access_token)
     })
 }
 
 exports.createAuthManPower = async (request, response ) => {
-    console.log(request.body);
+    // console.log(request.body);
+
     getAccessToken(() => {
         // response.status(200).send(access_token)
         axios(
@@ -147,7 +150,7 @@ exports.createAuthManPower = async (request, response ) => {
                     {
                         "email": request.body.email,
                         "blocked": false,
-                        "email_verified": true,
+                        "email_verified": false,
                         "given_name": request.body.firstName,
                         "name": request.body.firstName + " " + request.body.lastName,
                         "nickname": request.body.firstName + " " + request.body.lastName,
@@ -162,17 +165,20 @@ exports.createAuthManPower = async (request, response ) => {
             })
             .then(function (res) {
                 // console.log(res.data);
-                conn.query(INSERT_USER,[request.body.firstName,request.body.lastName,request.body.nid,request.body.street,request.body.city,request.body.mobile,request.body.email,"Man Power",1] ,(err, data, fields) => {
+                conn.query(INSERT_USER, [res.data.identities[0].user_id, res.data.picture, request.body.firstName, request.body.lastName, request.body.nid, request.body.street, request.body.city, request.body.mobile, request.body.email, "Man Power", 1], (err, data, fields) => {
+                    console.log(err);
+                })
+                conn.query(INSERT_MANPOWER,[request.body.company,request.body.oMail,request.body.description,res.data.identities[0].user_id,] ,(err, data, fields) => {
                     console.log(err);
                 })
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                // console.log(error.message);
+                console.log(error.message);
                 // logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
-        // response.send(access_token)
     })
+
 }
 
