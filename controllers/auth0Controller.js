@@ -3,6 +3,9 @@ const conn = require("../services/db");
 const {INSERT_USER,INSET_JOPPROVIDER,INSERT_JOBSEEKER, INSERT_MANPOWER} = require("../querys/user");
 const axios = require('axios').default;
 
+
+
+
 var config = JSON.stringify({
     "client_id": "3Vzq0EAmYddInFVyRtJmW1dVMTLvQIlE",
     "client_secret": "bJYr1PEwMLmT5Oo8z2OXTilfs0SZAfWPPt_sUjNwqZS7BMR-cb3Amu5SdiRnfhiM",

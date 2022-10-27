@@ -11,7 +11,7 @@ const router_payments = require('./routes/payments');
 const router_provider = require('./routes/jobProvider');
 
 // const errorHandler = require('./utils/errorHandler');
-
+const router_JobSeeker= require("./routes/JobSeeker");
 const app = express();
 app.use(express.json( ));
 const PORT = 8000;
@@ -22,6 +22,10 @@ app.use(cors())
 // app.use(errorHandler);
 
 app.use("/register",router_auth0);
+
+app.use("/jobs",router_jobs);
+app.use("/JobSeeker",router_JobSeeker)
+
 app.use('/payment', router_paymnet);
 
 
@@ -32,6 +36,7 @@ app.use("/complaints",router_complaints)
 app.use("/users",router_users)
 app.use("/chat",router_chat)
 app.use("/payments",router_payments)
+
 
 
 

@@ -1,5 +1,9 @@
 const conn = require("../services/db");
-const {GET_JOBS,GET_LATESTJOBS, APPLY_FOR_JOB, JOB_AD_POST, JOB_AD_VIEW, JOB_DELETE} = require("../querys/jobs");
+
+const {request} = require("express");
+
+const {GET_JOBS,GET_LATESTJOBS, APPLY_FOR_JOB,APPLIED_JOBS,REQUEST_JOBS, JOB_AD_POST, JOB_AD_VIEW, JOB_DELETE} = require("../querys/jobs");
+
 
 exports.getJobs = async (request, response ) => {
     console.log(request.body);
@@ -68,6 +72,26 @@ exports.applyForJob = async (request, response ) => {
         }
     })
 }
+
+
+exports.applyJobs = async (request, response) => {
+    conn.query(APPLIED_JOBS, (err, data, fields) => {
+        if(err){
+            response.status(401).json({
+                data: err
+            })
+        } else {
+            response.status(200).send(
+                data
+            )
+        }
+    })
+}
+
+exports.requestJobs = async (request, response) => {
+    conn.query(REQUEST_JOBS, (err, data, fields) => {
+        if(err){
+
 exports.JobAdPost = async (request, response ) => {
 
     console.log(request.body);
@@ -90,16 +114,18 @@ exports.JobAdView = async (request, response ) => {
     conn.query(JOB_AD_VIEW, [request.query.user_id], (err, data, fields) => {
         if(err) {
             // console.log(err);
+
             response.status(401).json({
                 data: err
             })
         } else {
-            // console.log(data);
+
             response.status(200).send(
                 data
             )
         }
     })
+
 }
 exports.DeleteJobs = async (request, response ) => {
 
@@ -115,4 +141,5 @@ exports.DeleteJobs = async (request, response ) => {
             response.status(201).json('Deleted successfully')
         }
     })
+
 }
