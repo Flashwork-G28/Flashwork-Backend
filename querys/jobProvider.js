@@ -7,3 +7,5 @@ exports.GET_NOTIFICATION ="SELECT * FROM job_provider_notification WHERE user_id
 
 exports.GET_NOTIFICATION_COUNT ="SELECT COUNT(user_id) AS count FROM job_provider_notification WHERE user_id= ? ;"
 
+exports.GET_JOB_ONGOIN ="SELECT id,title,job_date FROM jobs WHERE user_id= ? ;"
+

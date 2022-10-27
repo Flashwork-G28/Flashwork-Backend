@@ -1,5 +1,5 @@
 const express = require('express');
-const {getBookingWorkers, getSavedWorkers ,getNotification,getNotificationCount} = require('../controllers/jobProvider')
+const {getBookingWorkers, getSavedWorkers ,getNotification,getNotificationCount,getOngoinAdvertiesment} = require('../controllers/jobProvider')
 
 const router = express.Router();
 
@@ -14,6 +14,10 @@ router.route("/notification")
 
 router.route("/notificationCount")
     .post(getNotificationCount)
+
+router.route("/ongoinAdvertiesment")
+    .post(getOngoinAdvertiesment)
+
 
 
 
