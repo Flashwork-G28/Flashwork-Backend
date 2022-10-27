@@ -6,6 +6,7 @@ const router_paymnet = require('./routes/payment');
 const router_complaints = require('./routes/complaints');
 const router_users = require('./routes/users');
 const router_chat = require('./routes/chat');
+const router_payments = require('./routes/payments');
 
 const router_provider = require('./routes/jobProvider');
 
@@ -30,6 +31,7 @@ app.use("/jobProvider",router_provider);
 app.use("/complaints",router_complaints)
 app.use("/users",router_users)
 app.use("/chat",router_chat)
+app.use("/payments",router_payments)
 
 
 
