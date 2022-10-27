@@ -11,3 +11,4 @@ router.route("/updateProfile").post(updateSeeker)
 console.log("check here")
 
 module.exports = router;
+
